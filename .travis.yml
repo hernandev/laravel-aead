@@ -16,7 +16,7 @@ cache:
     - $HOME/.composer/cache
 
 before_install:
-  - echo "extension = sodium" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+  - printf "\n" | pecl install -f libsodium-2.0.8
   - travis_retry composer self-update
 
 install:
