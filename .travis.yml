@@ -16,6 +16,9 @@ cache:
     - $HOME/.composer/cache
 
 before_install:
+  - sudo add-apt-repository ppa:ondrej/php -y
+  - sudo apt-get -qq update
+  - sudo apt-get install -y libsodium-dev
   - printf "\n" | pecl install -f libsodium-2.0.8
   - travis_retry composer self-update
 
