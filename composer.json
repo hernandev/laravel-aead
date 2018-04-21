@@ -1,0 +1,35 @@
+{
+    "name": "hernandev/laravel-aead",
+    "description": "Advanced Encryption with Associated Data (AEAD) for Laravel.",
+    "keywords": ["laravel", "encryption", "cryptography", "aead", "aes-256-gcm", "chacha20", "poly1305", "xchacha20"],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Diego Hernandes",
+            "email": "diego@hernandev.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "LaravelAEAD\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "LaravelAEAD\\": "tests/"
+        }
+    },
+    "require": {
+        "php": ">=7.2.0",
+        "ext-sodium": "*",
+        "ext-json": "*",
+        "illuminate/support": "^5.6"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.0",
+        "mockery/mockery": "^1.0",
+        "symfony/var-dumper": "^4.0"
+    }
+}
