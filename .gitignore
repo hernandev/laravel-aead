@@ -1,2 +1,10 @@
+# package ignores.
 /vendor
 /composer.lock
+
+# development testing.
+/sandbox
+
+# phpunit / tests ignores.
+/phpunit.xml
+/coverage
