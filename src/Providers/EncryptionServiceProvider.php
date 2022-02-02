@@ -5,6 +5,7 @@ namespace LaravelAEAD\Providers;
 use LaravelAEAD\Encrypter;
 use Illuminate\Encryption\Encrypter as LaravelEncrypter;
 use Illuminate\Encryption\EncryptionServiceProvider as LaravelEncryptionServiceProvider;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Contracts\Config\Repository as Config;
 
@@ -52,7 +53,7 @@ class EncryptionServiceProvider extends LaravelEncryptionServiceProvider
      */
     protected function supported(string $cipher) : bool
     {
-        return array_has(Encrypter::getCiphers(), $cipher);
+        return Arr::has(Encrypter::getCiphers(), $cipher);
     }
 
     /**
