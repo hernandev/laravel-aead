@@ -2,6 +2,7 @@
 
 namespace LaravelAEAD;
 
+use Illuminate\Support\Arr;
 use LaravelAEAD\Ciphers;
 use LaravelAEAD\Contracts\Encrypter as EncrypterContract;
 use LaravelAEAD\Exceptions\DecryptException;
@@ -37,6 +38,11 @@ class Encrypter implements EncrypterContract
     protected $cipher;
 
     /**
+     * @var string $key
+     */
+    protected $key;
+
+    /**
      * Create a new encrypter instance.
      *
      * @param  string $key
@@ -49,6 +55,8 @@ class Encrypter implements EncrypterContract
     {
         // force the key into string.
         $key = (string)$key;
+
+        $this->key = $key;
 
         // create the instance of the cipher.
         $this->cipher = self::makeCipher($key, $cipherName);
@@ -134,7 +142,7 @@ class Encrypter implements EncrypterContract
         $payload = json_decode($this->decodeBase64($payload), true);
 
         // the payload should at least contain the 3 main keys.
-        if (!array_has($payload, ['value', 'nonce', 'ad'])) {
+        if (!Arr::has($payload, ['value', 'nonce', 'ad'])) {
             throw new DecryptException('Invalid Payload.');
         }
 
@@ -258,7 +266,7 @@ class Encrypter implements EncrypterContract
     public static function getCipherClass(string $cipherName): string
     {
         // retrieves the list of available ciphers
-        $cipherClass = array_get(self::getCiphers(), $cipherName, null);
+        $cipherClass = Arr::get(self::getCiphers(), $cipherName, null);
 
         // check if the cipher exists.
         if (!$cipherClass || !class_exists($cipherClass)) {
@@ -267,5 +275,9 @@ class Encrypter implements EncrypterContract
 
         // returns the cipher class.
         return $cipherClass;
+    }
+
+    public function getKey(): string {
+        return $this->key;
     }
 }
