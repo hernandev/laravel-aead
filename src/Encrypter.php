@@ -38,6 +38,11 @@ class Encrypter implements EncrypterContract
     protected $cipher;
 
     /**
+     * @var string $key
+     */
+    protected $key;
+
+    /**
      * Create a new encrypter instance.
      *
      * @param  string $key
@@ -50,6 +55,8 @@ class Encrypter implements EncrypterContract
     {
         // force the key into string.
         $key = (string)$key;
+
+        $this->key = $key;
 
         // create the instance of the cipher.
         $this->cipher = self::makeCipher($key, $cipherName);
@@ -268,5 +275,9 @@ class Encrypter implements EncrypterContract
 
         // returns the cipher class.
         return $cipherClass;
+    }
+
+    public function getKey(): string {
+        return $this->key;
     }
 }
